@@ -15,6 +15,9 @@ class CreateClothesTable extends Migration
     {
         Schema::create('clothes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('transaction_id')->on('id')->reference('transaction')->onUpdate('cascade');
+            $table->string('type_clothes');
+            $table->string('total');
             $table->timestamps();
         });
     }
