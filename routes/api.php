@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,12 +27,15 @@ Route::post('login', [AuthController::class, 'login']);
 
 
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:sanctum'], function () {
 
+    // Tester
+    Route::get('{user:id}', [UserController::class, 'show']);
 
     // Logout
     Route::post('logout', [AuthController::class, 'logout']);
 
-
-    Route::get('{user:id}', [UserController::class, 'show']);
+    // Customer
+    Route::post('customer', [CustomerController::class, 'store']);
+    Route::delete('customer', [CustomerController::class, 'destroy']);
 });
