@@ -15,10 +15,10 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('order_number');
             $table->unsignedBigInteger('customer_id')->on('id')->reference('customers')->onUpdate('cascade');
-            $table->unsignedBigInteger('harga_id')->on('id')->reference('prices')->onDelete('cascade');
+            $table->string('total_price');
             $table->string('berat');
-            $table->date('finish_data');
             $table->integer('status');
             $table->timestamps();
         });

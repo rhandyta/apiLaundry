@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CustomerController;
 use App\Http\Controllers\api\PriceController;
+use App\Http\Controllers\api\TransactionController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,4 +44,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:sanctum'], function () 
     // Price
     Route::post('price', [PriceController::class, 'store']);
     Route::delete('price', [PriceController::class, 'destroy']);
+
+    // Transaction
+    Route::post('transaction', [TransactionController::class, 'store']);
 });
