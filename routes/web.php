@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Customer_Transaction;
+use App\Models\Customers;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Ramsey\Uuid\Uuid;
 
@@ -17,6 +21,16 @@ use Ramsey\Uuid\Uuid;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::Get('test', function () {
-    return Uuid::uuid4();
+Route::get('test', function () {
+    $query = DB::table('customers')
+        ->join('customer_transactions', 'customer_id', '=', 'customers.id')
+        ->join('transactions', 'transactions.id', '=', 'customer_transactions.transaction_id')
+        ->where('customer_id', '=', 5)
+        ->get();
+
+    $eloquent = Customers::find(7)->transactions()->get();
+    return response()->json([
+        'query' => $query,
+        'eloquent' => $eloquent
+    ]);
 });

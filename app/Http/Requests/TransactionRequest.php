@@ -24,7 +24,6 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => 'required|numeric',
             'berat' => 'required|string',
             'status' => 'required|numeric'
         ];

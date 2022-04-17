@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\ClothesController;
 use App\Http\Controllers\api\CustomerController;
 use App\Http\Controllers\api\PriceController;
 use App\Http\Controllers\api\TransactionController;
@@ -47,4 +48,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:sanctum'], function () 
 
     // Transaction
     Route::post('transaction', [TransactionController::class, 'store']);
+
+    // Clothes
+    Route::post('clothes', [ClothesController::class, 'store']);
 });

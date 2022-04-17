@@ -17,7 +17,7 @@ class CustomersFactory extends Factory
         return [
             "name" => $name,
             "email" => $this->faker->email(),
-            "slug" => $name,
+            "slug" => \Str::slug($name),
             "no_telp" => $this->faker->phoneNumber(),
             "address" => $this->faker->address()
         ];
