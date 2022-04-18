@@ -32,6 +32,11 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:sanctum'], function () {
 
+
+    Route::get('test', function (Request $request) {
+        return Auth()->user()->name;
+    });
+
     // Tester
     Route::get('{user:id}', [UserController::class, 'show']);
 

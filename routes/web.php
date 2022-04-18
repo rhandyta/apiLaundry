@@ -3,6 +3,7 @@
 use App\Models\Customer_Transaction;
 use App\Models\Customers;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Ramsey\Uuid\Uuid;
@@ -21,16 +22,18 @@ use Ramsey\Uuid\Uuid;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('test', function () {
-    $query = DB::table('customers')
-        ->join('customer_transactions', 'customer_id', '=', 'customers.id')
-        ->join('transactions', 'transactions.id', '=', 'customer_transactions.transaction_id')
-        ->where('customer_id', '=', 5)
-        ->get();
+Route::get('test', function (Request $request) {
+    // $query = DB::table('customers')
+    //     ->join('customer_transactions', 'customer_id', '=', 'customers.id')
+    //     ->join('transactions', 'transactions.id', '=', 'customer_transactions.transaction_id')
+    //     ->where('customer_id', '=', 5)
+    //     ->get();
 
-    $eloquent = Customers::find(7)->transactions()->get();
-    return response()->json([
-        'query' => $query,
-        'eloquent' => $eloquent
-    ]);
+    // $eloquent = Customers::find(7)->transactions()->get();
+    // return response()->json([
+    //     'query' => $query,
+    //     'eloquent' => $eloquent
+    // ]);
+    $data = $request->session()->get('key');
+    return $data;
 });
